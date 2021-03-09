@@ -1,0 +1,43 @@
+			String []SPRP = {"출발지","도착지"};
+	String []sprpOption = {"출발지","도착지","둘다"};
+
+keyword = JOptionPane.showInputDialog(updateMsg);
+		int select = JOptionPane.showOptionDialog(null, "수정하실 항목을 선택해 주세요","출발,도착시 수정",
+		JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE, 
+		null, sprpOption, null);
+		if(select == JOptionPane.CLOSED_OPTION) {
+			JOptionPane.showMessageDialog(null, "취소하셨습니다.");
+		}else if(select == 0) {
+			SPRP[0] = JOptionPane.showInputDialog("변경하실 출발지를 입력해 주세요");
+			af.update(keyword, SPRP[0], null);
+		}else if(select ==1) {
+			SPRP[1] = JOptionPane.showInputDialog("변경하실 목적지를 입력하세요");
+			af.update(keyword, null, SPRP[1]);
+		}else {
+			SPRP = JOptionPane.showInputDialog("변경하실 출발지, 도착지를 입력해 주세요").split(",");
+			af.update(keyword, SPRP[0],SPRP[1]);
+		}
+
+
+
+void update(String keyword,String SP,String RP) {
+		String result = "";
+		int searchcnt=0;
+		for(int i=0;i<cnt;i++) {
+			searchcnt++;
+			if(keyword.equals(arrPlane[i][1])) {
+				break;
+			}
+		}
+		if(RP == null) {
+			arrPlane[searchcnt][3] = SP;
+		}else if(SP == null){
+			arrPlane[searchcnt][4] = RP;			
+		}else if(SP == RP) {
+			result = "수정할수 없습니다.";
+		}
+		else {
+			arrPlane[searchcnt][3] = SP;
+			arrPlane[searchcnt][4] = RP;
+		}
+	}
